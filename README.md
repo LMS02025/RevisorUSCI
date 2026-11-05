@@ -15,7 +15,6 @@ Aplicación web para revisar los Informes de Criterio y Bases de Diseño (Fase 1
 | Ruta | Descripción |
 |---|---|
 | `index.html` | Aplicación completa (HTML, CSS, JS y datos embebidos). Funciona con doble clic o publicada en GitHub Pages. |
-| `docs/` | PDF Rev. A de la versión anterior. La versión actual no los usa: cada observación enlaza al PDF original en Google Drive. |
 
 ## Pestañas
 
@@ -32,8 +31,8 @@ Aplicación web para revisar los Informes de Criterio y Bases de Diseño (Fase 1
 
 ## Publicar en GitHub Pages
 
-*Settings → Pages → Deploy from a branch*, rama `main`, carpeta `/ (root)`. La página carga fuentes desde Google Fonts; sin conexión usa las del sistema.
+*Settings → Pages → Deploy from a branch*, rama `main`, carpeta `/ (root)`. Queda en `https://lms02025.github.io/RevisorUSCI/`. La página carga fuentes desde Google Fonts; sin conexión usa las del sistema.
 
 ## Confidencialidad
 
-Este repositorio es **público**: el registro de observaciones y los PDF de `docs/` quedan accesibles para cualquiera. Si corresponde, cambiarlo a privado o retirar `docs/`.
+El repositorio no contiene los PDF de proyecto: cada observación enlaza al original en Google Drive (FOLIO 67 / FOLIO 68), que solo abre para quien tiene acceso a esa carpeta. El registro de observaciones sí está embebido en `index.html`; si el repositorio es público, cualquiera puede leerlo.
