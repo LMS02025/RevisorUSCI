@@ -25,9 +25,9 @@ Aplicación web para revisar los Informes de Criterio y Bases de Diseño (Fase 1
 
 ## Interacción
 
-Las pestañas y la lista de documentos funcionan como teclas: en reposo sobresalen levemente de la pantalla y, al seleccionarlas, se hunden y quedan presionadas mientras están activas. Los demás botones se elevan al pasar el cursor. La observación seleccionada sobresale como tecla elevada.
+Las pestañas y la lista de documentos funcionan como teclas: en reposo sobresalen levemente de la pantalla y, al seleccionarlas, se hunden y quedan presionadas mientras están activas. Los demás botones se elevan al pasar el cursor. La observación seleccionada sobresale como tecla elevada. En todas las tablas, la fila bajo el cursor se marca en gris y sobresale levemente.
 
-La franja superior (título, Sonido, Imprimir PDF y Encabezados fijos) y el menú de pestañas quedan fijos al desplazarse. El botón **Encabezados fijos / libres** decide si los encabezados de las tablas se mantienen visibles; la elección se recuerda en el navegador. Con la preferencia del sistema "reducir movimiento" los efectos se desactivan.
+La franja superior (título, Sonido, Imprimir PDF y Encabezados fijos) y el menú de pestañas quedan fijos al desplazarse. Los encabezados de las tablas quedan fijos por defecto; el botón **Encabezados fijos / libres** permite liberarlos y la elección se recuerda en el navegador. Con la preferencia del sistema "reducir movimiento" los efectos se desactivan.
 
 ## Imprimir PDF
 
