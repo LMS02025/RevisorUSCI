@@ -289,6 +289,33 @@ section[role="tabpanel"].anim{animation:tabIn .32s ease-out both}
 @keyframes tabPop{0%{transform:none}40%{transform:translateY(-4px) scale(1.05)}100%{transform:none}}
 .manote{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px;padding:7px 10px;font-size:12.5px;color:var(--ink-2)}
 .prt{margin-top:6px}
+/* Menús como teclas físicas: sobresalen en reposo y se hunden al seleccionarlos */
+:root{--key-sh:rgba(15,42,71,.38);--key-edge:#B9C4D2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--key-sh:rgba(0,0,0,.65);--key-edge:#0A1018}}
+:root[data-theme="dark"]{--key-sh:rgba(0,0,0,.65);--key-edge:#0A1018}
+.tabs .wrap{gap:7px;padding-top:8px;padding-bottom:9px;align-items:flex-end}
+.tab{background:var(--surface);border:1px solid var(--line)!important;border-radius:7px;padding:7px 13px 7px!important;color:var(--ink-2);
+  transform:translateY(-2px);box-shadow:0 3px 0 var(--key-edge),0 8px 14px -8px var(--key-sh);
+  transition:transform .14s cubic-bezier(.3,.7,.3,1.4),box-shadow .14s ease,background .18s,color .18s}
+.tab::after{display:none}
+.tab:hover{transform:translateY(-4px);color:var(--ink);box-shadow:0 5px 0 var(--key-edge),0 14px 20px -9px var(--key-sh)}
+.tab:active{transform:translateY(2px);box-shadow:0 0 0 var(--key-edge),inset 0 2px 5px var(--key-sh)}
+.tab[aria-selected="true"]{transform:translateY(2px);background:var(--accent-soft);color:var(--accent);border-color:var(--accent)!important;
+  box-shadow:0 0 0 var(--key-edge),inset 0 3px 6px var(--key-sh),inset 0 -1px 0 rgba(255,255,255,.35)}
+.tab[aria-selected="true"]:hover{transform:translateY(1px)}
+.tab.pop{animation:keyPress .42s cubic-bezier(.3,.7,.3,1.3) 1}
+@keyframes keyPress{0%{transform:translateY(-4px)}45%{transform:translateY(4px) scale(.97)}100%{transform:translateY(2px)}}
+.nav .dl{padding:4px 2px 8px}
+.di{width:calc(100% - 14px);margin:5px 7px;border:1px solid var(--line);border-left:3px solid var(--line-strong);border-radius:6px;background:var(--surface);
+  transform:translateY(-1px);box-shadow:0 2px 0 var(--key-edge),0 6px 12px -8px var(--key-sh);
+  transition:transform .14s cubic-bezier(.3,.7,.3,1.4),box-shadow .14s ease,background .18s,border-color .18s}
+.di:hover{background:var(--surface);transform:translateY(-3px);box-shadow:0 4px 0 var(--key-edge),0 12px 18px -9px var(--key-sh)}
+.di:active{transform:translateY(2px);box-shadow:0 0 0 var(--key-edge),inset 0 2px 5px var(--key-sh)}
+.di[aria-current="true"]{transform:translateY(2px);background:var(--accent-soft);border-color:var(--accent);border-left-color:var(--accent);
+  box-shadow:0 0 0 var(--key-edge),inset 0 3px 6px var(--key-sh)}
+.di[aria-current="true"]:hover{transform:translateY(1px)}
+.di.pressed{animation:keyPress2 .38s cubic-bezier(.3,.7,.3,1.3) 1}
+@keyframes keyPress2{0%{transform:translateY(-3px)}45%{transform:translateY(3px) scale(.985)}100%{transform:translateY(2px)}}
 @media print{
   @page{size:A4;margin:14mm 12mm 16mm}
   header.band,nav.tabs,#nav,.filters,.more,.stepper,.actions,.snd{display:none!important}
@@ -576,6 +603,7 @@ $('#tablist').addEventListener('click',e=>{const b=e.target.closest('.tab'); if(
 
 /* ---------- Navegación de documentos ---------- */
 let cur=0, selObs=null;
+function pressCur(){ const b=document.querySelector('.di[aria-current="true"]'); if(b){ b.classList.remove('pressed'); void b.offsetWidth; b.classList.add('pressed'); } }
 function renderNav(){
   const html=TOMOS.map(t=>{
     const ps=D.pos.filter(p=>p.tomo===t);
@@ -591,7 +619,7 @@ $('#nav').addEventListener('click',e=>{const b=e.target.closest('.di'); if(b){ S
 $('#nav').addEventListener('toggle',e=>{ if(e.target.tagName==='DETAILS' && e.target.open) SND.play('tick'); },true);
 function go(i, keepPage){
   cur=Math.max(0,Math.min(D.pos.length-1,i)); selObs=null; aifShow=40; if(typeof viewer!=='undefined') viewer.flag=null;
-  renderNav();
+  renderNav(); pressCur();
   const p=D.pos[cur], d=D.docs[p.code];
   const sf=specFor(p.code).filter(f=>(f.ev[p.code]||[]).length).sort((a,b)=>RANK[b.sev]-RANK[a.sev]);
   const fo=aifFor(p.usci,p.code).filter(o=>firstPg(o)).sort((a,b)=>(b.loc.length?1:0)-(a.loc.length?1:0)||RANK[b.sev]-RANK[a.sev]);

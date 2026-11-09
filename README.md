@@ -23,6 +23,10 @@ Aplicación web para revisar los Informes de Criterio y Bases de Diseño (Fase 1
 - **Observaciones IF (G_PEPID)**: las 1.652 observaciones (1.571 de los registros USCI y 81 de Medio Ambiente) (matriz USCI × especialidad, filtros por USCI, especialidad, documento y severidad).
 - **Revisión especialista**, **Registro normativo**, **Resumen por Tomo**, **Matriz de auditoría**, **Control normativo**, **Brechas y estudios**, **BALI y oferta Sacyr**, **Índice USCI**.
 
+## Interacción
+
+Las pestañas y la lista de documentos funcionan como teclas: en reposo sobresalen levemente de la pantalla y, al seleccionarlas, se hunden y quedan presionadas mientras están activas. Los demás botones se elevan al pasar el cursor. Con la preferencia del sistema "reducir movimiento" los efectos se desactivan.
+
 ## Imprimir PDF
 
 El botón **Imprimir PDF** de la cabecera genera un PDF A4 con lo que está desplegado en la pestaña activa (en *Recorrido*, el documento abierto; en *Observaciones IF*, todas las filas que cumplen los filtros). Cada PDF lleva la fecha y hora de emisión, la fecha de actualización del registro IF y la de la revisión del especialista, además de los filtros aplicados y la numeración de páginas. Usa jsPDF 2.5.1 y jsPDF-AutoTable 3.8.2 desde cdnjs, por lo que requiere conexión; sin ella se abre la impresión del navegador.
