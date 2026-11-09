@@ -340,7 +340,14 @@ th{position:static}
 .obs[aria-pressed="true"]:hover{transform:translateY(-5px)}
 .obs:active{transform:translateY(1px);box-shadow:inset 0 2px 6px var(--key-sh)}
 @keyframes obsLift{0%{transform:translateY(1px)}40%{transform:translateY(2px) scale(.995)}75%{transform:translateY(-6px)}100%{transform:translateY(-4px)}}
+/* Todas las tablas: fila gris al pasar el cursor y fila que sobresale */
+tbody tr{transition:transform .16s cubic-bezier(.3,.7,.3,1.4),box-shadow .16s ease}
+tbody tr td{transition:background .14s}
+tbody tr:hover td{background:var(--sunk)}
+tbody tr:hover{transform:translateY(-2px);position:relative;z-index:1;box-shadow:0 3px 0 var(--key-edge),0 12px 20px -10px var(--key-sh)}
+tbody tr:active{transform:translateY(1px);box-shadow:inset 0 2px 5px var(--key-sh)}
 @media print{
+  tbody tr{transform:none!important}
   @page{size:A4;margin:14mm 12mm 16mm}
   .thfix .tbl-wrap{max-height:none;overflow:visible}
   header.band,nav.tabs,#nav,.filters,.more,.stepper,.actions,.snd{display:none!important}
@@ -633,9 +640,9 @@ $('#prt').addEventListener('click',()=>{ SND.play('tick'); exportPDF(); });
   try{ new ResizeObserver(setH).observe(bar); }catch(e){ addEventListener('resize',setH); }
   $('#sttd').textContent=AIF.SRC.updated;
   try{ new IntersectionObserver(([e])=>strip.classList.toggle('on',!e.isIntersecting),{threshold:0}).observe(document.querySelector('header.band')); }catch(e){ strip.classList.add('on'); }
-  const b=$('#thf'); let on=true; try{ on=localStorage.getItem('usci_thfix')!=='0'; }catch(e){}
+  const b=$('#thf'); let on=true; try{ on=localStorage.getItem('usci_thfix2')!=='0'; }catch(e){}
   const paint=()=>{ document.body.classList.toggle('thfix',on); b.setAttribute('aria-pressed',on); $('#thfl').textContent=on?'Encabezados fijos':'Encabezados libres'; };
-  paint(); b.addEventListener('click',()=>{ on=!on; try{ localStorage.setItem('usci_thfix',on?'1':'0'); }catch(e){} paint(); SND.play('toggle',true); });
+  paint(); b.addEventListener('click',()=>{ on=!on; try{ localStorage.setItem('usci_thfix2',on?'1':'0'); }catch(e){} paint(); SND.play('toggle',true); });
 })();
 $('#tablist').addEventListener('click',e=>{const b=e.target.closest('.tab'); if(b){ SND.play('tab'); showTab(b.dataset.t);} });
 
